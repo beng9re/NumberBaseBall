@@ -1,6 +1,13 @@
 plugins {
     id 'java'
+    id 'org.ec4j.editorconfig' version '0.0.3'
 }
+
+editorconfig {
+    excludes = ['build']
+}
+
+check.dependsOn editorconfigCheck
 
 group 'camp.nextstep.edu'
 version '1.0.0'
