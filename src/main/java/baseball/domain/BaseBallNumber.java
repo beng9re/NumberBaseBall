@@ -12,6 +12,10 @@ public class BaseBallNumber {
 		this.ballNumbers = createBallNumber(ballNumbers);
 	}
 
+	public static BaseBallNumber createRandomBaseBallNumber() {
+		return new BaseBallNumber(ArraysUtil.randomIntegerArray(1, 9, 3));
+	}
+
 	public LinkedHashSet<Integer> getBallNumbers() {
 		return this.ballNumbers;
 	}
