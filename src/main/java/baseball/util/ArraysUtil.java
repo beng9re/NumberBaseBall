@@ -43,7 +43,7 @@ public class ArraysUtil {
 
 	}
 
-	private static int[] integerWapToValueArray(Integer[] convert) {
+	public static int[] integerWapToValueArray(Integer[] convert) {
 		int[] result = new int[convert.length];
 		for (int i = 0; i < convert.length; i++) {
 			result[i] = convert[i];

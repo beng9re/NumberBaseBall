@@ -1,6 +1,10 @@
 package baseball.domain;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Objects;
 
 import baseball.util.ArraysUtil;
 
@@ -20,6 +24,42 @@ public class BaseBallNumber {
 		return this.ballNumbers;
 	}
 
+	public int verifyBallCount(BaseBallNumber targetBaseBallNumber) {
+		int ballCount = 0;
+		List<Integer> thisBaseballList = new ArrayList<>(this.ballNumbers);
+		List<Integer> targetBaseballList = new ArrayList<>(targetBaseBallNumber.getBallNumbers());
+		for (int i = 0; i < thisBaseballList.size(); i++) {
+			if(isBall(i,targetBaseballList)){
+				ballCount++;
+			}
+		}
+		return ballCount;
+	}
+
+	public int verifyStrikeCount(BaseBallNumber targetBaseBallNumber) {
+		int strikeCount = 0;
+		List<Integer> thisBaseballList = new ArrayList<>(this.ballNumbers);
+		List<Integer> targetBaseballList = new ArrayList<>(targetBaseBallNumber.getBallNumbers());
+		for (int i = 0; i < thisBaseballList.size(); i++) {
+			if (targetBaseballList.get(i).equals(thisBaseballList.get(i))) {
+				strikeCount++;
+			}
+
+		}
+		return strikeCount;
+	}
+
+	private boolean isBall(int index, List<Integer> targetBaseBallNumberList) {
+		List<Integer> thisBaseballList = new ArrayList<>(this.ballNumbers);
+		List<Integer> verifyList = new ArrayList<>(thisBaseballList);
+		verifyList.remove(index);
+		if (verifyList.contains(targetBaseBallNumberList.get(index))) {
+			return true;
+		}
+		return false;
+	}
+
+
 	private LinkedHashSet<Integer> createBallNumber(int[] ballNumberArr) {
 		LinkedHashSet<Integer> ballNumbers = ArraysUtil.convertIntegerArrayToSet(ballNumberArr);
 		validate(ballNumbers);
@@ -28,6 +68,18 @@ public class BaseBallNumber {
 
 	public void changeBallNumber(int[] ballNumberArr) {
 		this.ballNumbers = createBallNumber(ballNumberArr);
+	}
+
+	public void changeRandomBallNumber() {
+		LinkedHashSet<Integer> current = this.ballNumbers;
+		int[] currentArr = ArraysUtil.integerWapToValueArray(current.toArray(new Integer[0]));
+		int[] randomNumber = ArraysUtil.randomIntegerArray(1, 9, 3);
+
+		while (Arrays.equals(randomNumber,currentArr)){
+			randomNumber = ArraysUtil.randomIntegerArray(1, 9,3);
+		}
+
+		changeBallNumber(randomNumber);
 	}
 
 	private void validateNumber(int number) {
@@ -43,5 +95,20 @@ public class BaseBallNumber {
 		for (int ballNumber : ballNumbers) {
 			validateNumber(ballNumber);
 		}
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		BaseBallNumber that = (BaseBallNumber)o;
+		return Objects.equals(new ArrayList<>(ballNumbers), new ArrayList<>(that.ballNumbers));
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(ballNumbers);
 	}
 }
