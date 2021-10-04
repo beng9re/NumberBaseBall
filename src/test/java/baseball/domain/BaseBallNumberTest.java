@@ -9,6 +9,7 @@ import java.util.LinkedHashSet;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -67,10 +68,62 @@ class BaseBallNumberTest {
 		for (int i = 0; i < changeNumbers.length; i++) {
 			Assertions.assertThat(changeNumbers[i]).isEqualTo(currentBaseBallNumber[i]);
 		}
+	}
 
+	@Test
+	@DisplayName("숫자가 같으면 두 객체는 같다")
+	void equalBaseBall() {
+		BaseBallNumber first = new BaseBallNumber(new int[]{1, 2,3});
+		BaseBallNumber two = new BaseBallNumber(new int[]{1, 2, 3});
+		Assertions.assertThat(first.equals(two)).isTrue();
+		two.changeRandomBallNumber();
+		Assertions.assertThat(first.equals(two)).isFalse();
 
 	}
 
+	@RepeatedTest(100)
+	@DisplayName("숫자 야구가 랜덤으로 변경된다.")
+	void changeRandomBaseBall() {
+		BaseBallNumber baseBallNumber = BaseBallNumber.createRandomBaseBallNumber();
+		BaseBallNumber cloneBaseBallNumber = new BaseBallNumber(ArraysUtil.integerWapToValueArray(
+			baseBallNumber.getBallNumbers().toArray(new Integer[0])));
+
+		baseBallNumber.changeRandomBallNumber();
+		Assertions.assertThatCode(()-> baseBallNumber.validate(baseBallNumber.getBallNumbers()))
+			.doesNotThrowAnyException();
+		;
+
+		Assertions.assertThat(cloneBaseBallNumber.equals(baseBallNumber)).isFalse();
+
+	}
+
+	@Test
+	@DisplayName("랜덤한 숫자야구 숫자클래스를 생성한다.")
+	void createRandomBaseBall() {
+		BaseBallNumber baseBallNumber = BaseBallNumber.createRandomBaseBallNumber();
+		Assertions.assertThatCode(()-> baseBallNumber.validate(baseBallNumber.getBallNumbers()))
+			.doesNotThrowAnyException();
+	}
+
+	@DisplayName("다른 BallNumber 클래스를 비교하여 BallCount를 반환한다")
+	@ParameterizedTest
+	@CsvSource(value = {"1,3,4 : 1,4,3 : 2"}, delimiterString = ":" )
+	void verifyBallCountTest(String source, String target, String count) {
+		BaseBallNumber sourceBaseBall = new BaseBallNumber(ArraysUtil.convertIntegerArray(source.split(",")));
+		BaseBallNumber targetBaseBall = new BaseBallNumber(ArraysUtil.convertIntegerArray(target.split(",")));
+
+		Assertions.assertThat(sourceBaseBall.verifyBallCount(targetBaseBall)).isEqualTo(Integer.parseInt(count));
+	}
+
+	@DisplayName("다른 BallNumber 클래스를 비교하여 BallCount를 반환한다")
+	@ParameterizedTest
+	@CsvSource(value = {"1,3,4 : 1,4,3 : 1"},delimiterString = ":" )
+	void verifyStrikeCountTest(String source,String target,String count) {
+		BaseBallNumber sourceBaseBall = new BaseBallNumber(ArraysUtil.convertIntegerArray(source.split(",")));
+		BaseBallNumber targetBaseBall = new BaseBallNumber(ArraysUtil.convertIntegerArray(target.split(",")));
+
+		Assertions.assertThat(sourceBaseBall.verifyStrikeCount(targetBaseBall)).isEqualTo(Integer.parseInt(count));
+	}
 
 
 
