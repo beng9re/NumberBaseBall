@@ -12,7 +12,7 @@ import baseball.util.ArraysUtil;
 public class BaseBallNumber {
 	private LinkedHashSet<Integer> ballNumbers;
 
-	BaseBallNumber(int[] ballNumbers) {
+	public BaseBallNumber(int[] ballNumbers) {
 		this.ballNumbers = createBallNumber(ballNumbers);
 	}
 
