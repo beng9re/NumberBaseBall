@@ -1,11 +1,10 @@
 package baseball.util;
 
-
+import static org.assertj.core.api.Assertions.*;
 
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -22,7 +21,7 @@ class ArraysUtilTest {
 		Integer[] outArr = convertValue.toArray(new Integer[0]);
 
 		for (int i = 0; i < outArr.length; i++) {
-			Assertions.assertThat(intArray[i]).isEqualTo(outArr[i]);
+			assertThat(intArray[i]).isEqualTo(outArr[i]);
 		}
 	}
 
@@ -33,7 +32,7 @@ class ArraysUtilTest {
 		int[] convertArray = ArraysUtil.convertIntegerArray(changeValue);
 
 		for (int i = 0; i < convertArray.length; i++) {
-			Assertions.assertThat(convertArray[i]).isEqualTo(Integer.parseInt(changeValue[i]));
+			assertThat(convertArray[i]).isEqualTo(Integer.parseInt(changeValue[i]));
 		}
 	}
 
@@ -45,9 +44,9 @@ class ArraysUtilTest {
 		HashSet<Integer> randomArrayCk = new HashSet();
 		for (int value : randomArray) {
 			randomArrayCk.add(value);
-			Assertions.assertThat(value).isBetween(start, end);
+			assertThat(value).isBetween(start, end);
 		}
-		Assertions.assertThat(randomArrayCk.size()).isEqualTo(count);
+		assertThat(randomArrayCk.size()).isEqualTo(count);
 	}
 
 }

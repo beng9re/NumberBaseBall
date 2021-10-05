@@ -1,7 +1,6 @@
 package baseball.util;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.List;
 

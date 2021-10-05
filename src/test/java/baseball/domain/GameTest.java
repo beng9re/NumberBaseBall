@@ -1,8 +1,7 @@
 package baseball.domain;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.*;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -14,7 +13,7 @@ class GameTest {
 	@DisplayName("게임이 생성되면 종료 상태로 생성이 된다")
 	void initGetStatus() {
 		Game game = new Game();
-		Assertions.assertThat(game.getStatus()).isEqualTo(GameStatus.EXIT);
+		assertThat(game.getStatus()).isEqualTo(GameStatus.EXIT);
 	}
 
 
@@ -23,7 +22,7 @@ class GameTest {
 	void start() {
 		Game game = new Game();
 		game.start();
-		Assertions.assertThat(game.getStatus()).isEqualTo(GameStatus.START);
+		assertThat(game.getStatus()).isEqualTo(GameStatus.START);
 	}
 
 	@Test
@@ -32,7 +31,7 @@ class GameTest {
 		Game game = new Game();
 		game.start();
 		game.stop();
-		Assertions.assertThat(game.getStatus()).isEqualTo(GameStatus.EXIT);
+		assertThat(game.getStatus()).isEqualTo(GameStatus.EXIT);
 	}
 
 	@ParameterizedTest
@@ -42,9 +41,9 @@ class GameTest {
 		Game game = new Game();
 
 		if (command.equals("1") || command.equals("2")) {
-			Assertions.assertThatCode(()-> game.changeGameStatus(command)).doesNotThrowAnyException();
+			assertThatCode(()-> game.changeGameStatus(command)).doesNotThrowAnyException();
 			return;
 		}
-		Assertions.assertThatIllegalArgumentException().isThrownBy(()->game.changeGameStatus(command));
+		assertThatIllegalArgumentException().isThrownBy(()->game.changeGameStatus(command));
 	}
 }

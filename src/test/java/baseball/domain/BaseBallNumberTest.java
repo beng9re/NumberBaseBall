@@ -1,13 +1,9 @@
 package baseball.domain;
 
-
-
 import static org.assertj.core.api.Assertions.*;
-
 
 import java.util.LinkedHashSet;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
@@ -53,7 +49,7 @@ class BaseBallNumberTest {
 		LinkedHashSet<Integer> baseBallNumbers = baseBallNumber.getBallNumbers();
 
 		for (Integer ball : baseBallNumbers) {
-			Assertions.assertThat(ball).isEqualTo(numbers[index]);
+			assertThat(ball).isEqualTo(numbers[index]);
 			index++;
 		}
 	}
@@ -68,7 +64,7 @@ class BaseBallNumberTest {
 		Integer[] currentBaseBallNumber = baseBallNumber.getBallNumbers().toArray(new Integer[0]);
 
 		for (int i = 0; i < changeNumbers.length; i++) {
-			Assertions.assertThat(changeNumbers[i]).isEqualTo(currentBaseBallNumber[i]);
+			assertThat(changeNumbers[i]).isEqualTo(currentBaseBallNumber[i]);
 		}
 	}
 
@@ -78,20 +74,20 @@ class BaseBallNumberTest {
 		BaseBallNumber first = new BaseBallNumber(new int[]{1, 2, 3});
 		BaseBallNumber equalFirst = first;
 		BaseBallNumber two = new BaseBallNumber(new int[]{1, 2, 3});
-		Assertions.assertThat(first == two).isFalse();
-		Assertions.assertThat(first.equals(equalFirst));
+		assertThat(first == two).isFalse();
+		assertThat(first.equals(equalFirst));
 
-		Assertions.assertThat(first.equals(two)).isTrue();
-		Assertions.assertThat(first.hashCode()).isEqualTo(two.hashCode());
+		assertThat(first.equals(two)).isTrue();
+		assertThat(first.hashCode()).isEqualTo(two.hashCode());
 		two.changeRandomBallNumber();
-		Assertions.assertThat(first.equals(two)).isFalse();
+		assertThat(first.equals(two)).isFalse();
 
 		two = null;
-		Assertions.assertThat(first.equals(two)).isFalse();
+		assertThat(first.equals(two)).isFalse();
 
 	}
 
-	@RepeatedTest(5000)
+	@RepeatedTest(200)
 	@DisplayName("숫자 야구가 랜덤으로 변경된다.")
 	void changeRandomBaseBall() {
 		BaseBallNumber baseBallNumber = BaseBallNumber.createRandomBaseBallNumber();
@@ -99,11 +95,11 @@ class BaseBallNumberTest {
 			baseBallNumber.getBallNumbers().toArray(new Integer[0])));
 
 		baseBallNumber.changeRandomBallNumber();
-		Assertions.assertThatCode(()-> baseBallNumber.validate(baseBallNumber.getBallNumbers()))
+		assertThatCode(()-> baseBallNumber.validate(baseBallNumber.getBallNumbers()))
 			.doesNotThrowAnyException();
 		;
 
-		Assertions.assertThat(cloneBaseBallNumber.equals(baseBallNumber)).isFalse();
+		assertThat(cloneBaseBallNumber.equals(baseBallNumber)).isFalse();
 
 	}
 
@@ -111,7 +107,7 @@ class BaseBallNumberTest {
 	@DisplayName("랜덤한 숫자야구 숫자클래스를 생성한다.")
 	void createRandomBaseBall() {
 		BaseBallNumber baseBallNumber = BaseBallNumber.createRandomBaseBallNumber();
-		Assertions.assertThatCode(()-> baseBallNumber.validate(baseBallNumber.getBallNumbers()))
+		assertThatCode(()-> baseBallNumber.validate(baseBallNumber.getBallNumbers()))
 			.doesNotThrowAnyException();
 	}
 
@@ -122,7 +118,7 @@ class BaseBallNumberTest {
 		BaseBallNumber sourceBaseBall = new BaseBallNumber(ArraysUtil.convertIntegerArray(source.split(",")));
 		BaseBallNumber targetBaseBall = new BaseBallNumber(ArraysUtil.convertIntegerArray(target.split(",")));
 
-		Assertions.assertThat(sourceBaseBall.verifyBallCount(targetBaseBall)).isEqualTo(Integer.parseInt(count));
+		assertThat(sourceBaseBall.verifyBallCount(targetBaseBall)).isEqualTo(Integer.parseInt(count));
 	}
 
 	@DisplayName("다른 BallNumber 클래스를 비교하여 BallCount를 반환한다")
@@ -132,7 +128,7 @@ class BaseBallNumberTest {
 		BaseBallNumber sourceBaseBall = new BaseBallNumber(ArraysUtil.convertIntegerArray(source.split(",")));
 		BaseBallNumber targetBaseBall = new BaseBallNumber(ArraysUtil.convertIntegerArray(target.split(",")));
 
-		Assertions.assertThat(sourceBaseBall.verifyStrikeCount(targetBaseBall)).isEqualTo(Integer.parseInt(count));
+		assertThat(sourceBaseBall.verifyStrikeCount(targetBaseBall)).isEqualTo(Integer.parseInt(count));
 	}
 
 
