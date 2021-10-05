@@ -74,14 +74,22 @@ class BaseBallNumberTest {
 	@DisplayName("숫자가 같으면 두 객체는 같다")
 	void equalBaseBall() {
 		BaseBallNumber first = new BaseBallNumber(new int[]{1, 2,3});
+		BaseBallNumber equalFirst = first;
 		BaseBallNumber two = new BaseBallNumber(new int[]{1, 2, 3});
+		Assertions.assertThat(first == two).isFalse();
+		Assertions.assertThat(first.equals(equalFirst));
+
 		Assertions.assertThat(first.equals(two)).isTrue();
+		Assertions.assertThat(first.hashCode()).isEqualTo(two.hashCode());
 		two.changeRandomBallNumber();
+		Assertions.assertThat(first.equals(two)).isFalse();
+
+		two = null;
 		Assertions.assertThat(first.equals(two)).isFalse();
 
 	}
 
-	@RepeatedTest(100)
+	@RepeatedTest(5000)
 	@DisplayName("숫자 야구가 랜덤으로 변경된다.")
 	void changeRandomBaseBall() {
 		BaseBallNumber baseBallNumber = BaseBallNumber.createRandomBaseBallNumber();
