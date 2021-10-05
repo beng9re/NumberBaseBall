@@ -49,8 +49,8 @@ public class BaseBallResult {
 			throw new IllegalArgumentException("Strike는 0 ~ 3범위 이어야 합니다. ");
 		}
 		validationSumBallResult();
-
 	}
+
 	private void validationBall() {
 		if (ball < 0 || ball > 3) {
 			throw new IllegalArgumentException("ball은 0 ~ 3범위입니다.");

@@ -1,6 +1,6 @@
 package baseball.util;
 
-import static org.junit.jupiter.api.Assertions.*;
+
 
 import java.util.HashSet;
 import java.util.LinkedHashSet;
@@ -45,7 +45,7 @@ class ArraysUtilTest {
 		HashSet<Integer> randomArrayCk = new HashSet();
 		for (int value : randomArray) {
 			randomArrayCk.add(value);
-			Assertions.assertThat(value).isBetween(start,end);
+			Assertions.assertThat(value).isBetween(start, end);
 		}
 		Assertions.assertThat(randomArrayCk.size()).isEqualTo(count);
 	}

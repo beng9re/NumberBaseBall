@@ -17,7 +17,7 @@ public class Game {
 		status = GameStatus.EXIT;
 	}
 
-	public void changeGameStatus (String commandString) throws IllegalArgumentException{
+	public void changeGameStatus(String commandString) throws IllegalArgumentException {
 		int command = validateCommand(commandString);
 		if (command == STOP) {
 			stop();
@@ -30,7 +30,7 @@ public class Game {
 		int command = -9;
 		try {
 			command	= Integer.parseInt(commandString);
-			if( command != STOP && command != START){
+			if ( command != STOP && command != START) {
 				throw new IllegalArgumentException("1 , 2의 숫자만 가능합니다.");
 			}
 		} catch (NumberFormatException e) {

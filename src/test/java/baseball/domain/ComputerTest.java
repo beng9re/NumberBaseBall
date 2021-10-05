@@ -29,5 +29,4 @@ class ComputerTest {
 		assertThat(hintBaseBallResult.getStatus()).isEqualTo(BaseBallResultStatus.COLLECT);
 
 	}
-
 }

@@ -24,7 +24,8 @@ class BaseBallNumberTest {
 	@DisplayName("중복된 숫자가 있으면 에러가 발생된다.")
 	void numberOverlapValidation(String number) {
 		String[] numbers = number.split(",");
-		assertThatIllegalArgumentException().isThrownBy(()-> new BaseBallNumber(ArraysUtil.convertIntegerArray(numbers)));
+		assertThatIllegalArgumentException().isThrownBy(()->
+			new BaseBallNumber(ArraysUtil.convertIntegerArray(numbers)));
 	}
 
 	@ParameterizedTest()
@@ -32,7 +33,8 @@ class BaseBallNumberTest {
 	@DisplayName("숫자 세자리가 아니면 에러가 발생된다.")
 	void numberSizeValidation(String number) {
 		String[] numbers = number.split(",");
-		assertThatIllegalArgumentException().isThrownBy(()-> new BaseBallNumber(ArraysUtil.convertIntegerArray(numbers)));
+		assertThatIllegalArgumentException().isThrownBy(()->
+			new BaseBallNumber(ArraysUtil.convertIntegerArray(numbers)));
 	}
 
 	@Test
@@ -73,7 +75,7 @@ class BaseBallNumberTest {
 	@Test
 	@DisplayName("숫자가 같으면 두 객체는 같다")
 	void equalBaseBall() {
-		BaseBallNumber first = new BaseBallNumber(new int[]{1, 2,3});
+		BaseBallNumber first = new BaseBallNumber(new int[]{1, 2, 3});
 		BaseBallNumber equalFirst = first;
 		BaseBallNumber two = new BaseBallNumber(new int[]{1, 2, 3});
 		Assertions.assertThat(first == two).isFalse();
@@ -125,8 +127,8 @@ class BaseBallNumberTest {
 
 	@DisplayName("다른 BallNumber 클래스를 비교하여 BallCount를 반환한다")
 	@ParameterizedTest
-	@CsvSource(value = {"1,3,4 : 1,4,3 : 1"},delimiterString = ":" )
-	void verifyStrikeCountTest(String source,String target,String count) {
+	@CsvSource(value = {"1,3,4 : 1,4,3 : 1"}, delimiterString = ":" )
+	void verifyStrikeCountTest(String source, String target, String count) {
 		BaseBallNumber sourceBaseBall = new BaseBallNumber(ArraysUtil.convertIntegerArray(source.split(",")));
 		BaseBallNumber targetBaseBall = new BaseBallNumber(ArraysUtil.convertIntegerArray(target.split(",")));
 

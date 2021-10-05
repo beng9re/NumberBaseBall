@@ -46,7 +46,7 @@ public class BaseBallGameController {
 		String question = inputView.exitQuestion();
 		try {
 			game.changeGameStatus(question);
-			if(game.getStatus() == GameStatus.START) {
+			if (game.getStatus() == GameStatus.START) {
 				gameStart();
 			}
 		} catch (IllegalArgumentException e) {

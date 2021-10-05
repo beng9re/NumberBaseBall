@@ -29,7 +29,7 @@ public class BaseBallNumber {
 		List<Integer> thisBaseballList = new ArrayList<>(this.ballNumbers);
 		List<Integer> targetBaseballList = new ArrayList<>(targetBaseBallNumber.getBallNumbers());
 		for (int i = 0; i < thisBaseballList.size(); i++) {
-			if(isBall(i,targetBaseballList)){
+			if (isBall(i, targetBaseballList)) {
 				ballCount++;
 			}
 		}
@@ -75,8 +75,8 @@ public class BaseBallNumber {
 		int[] currentArr = ArraysUtil.integerWapToValueArray(current.toArray(new Integer[0]));
 		int[] randomNumber = ArraysUtil.randomIntegerArray(1, 9, 3);
 
-		while (Arrays.equals(randomNumber,currentArr)){
-			randomNumber = ArraysUtil.randomIntegerArray(1, 9,3);
+		while (Arrays.equals(randomNumber, currentArr)) {
+			randomNumber = ArraysUtil.randomIntegerArray(1, 9, 3);
 		}
 
 		changeBallNumber(randomNumber);
@@ -98,12 +98,14 @@ public class BaseBallNumber {
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		if (this == o)
+	public boolean equals(Object object) {
+		if (this == object) {
 			return true;
-		if (o == null || getClass() != o.getClass())
+		}
+		if (object == null || getClass() != object.getClass()) {
 			return false;
-		BaseBallNumber that = (BaseBallNumber)o;
+		}
+		BaseBallNumber that = (BaseBallNumber)object;
 		return Objects.equals(new ArrayList<>(ballNumbers), new ArrayList<>(that.ballNumbers));
 	}
 

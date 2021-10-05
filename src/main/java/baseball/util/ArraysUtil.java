@@ -32,11 +32,12 @@ public class ArraysUtil {
 		}
 		return integerWapToValueArray(list.toArray(new Integer[0]));
 	}
-	private static int randomNotDuplicatePickNumber (List currenList, int start, int end) {
+
+	private static int randomNotDuplicatePickNumber(List currenList, int start, int end) {
 		while (true) {
 			int randomValue = Randoms.pickNumberInRange(start, end);
 			boolean contains = currenList.contains(randomValue);
-			if(!contains) {
+			if (!contains) {
 				return randomValue;
 			}
 		}

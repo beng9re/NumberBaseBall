@@ -41,7 +41,7 @@ class GameTest {
 	void changeGameStatus(String command) {
 		Game game = new Game();
 
-		if(command.equals("1") || command.equals("2")) {
+		if (command.equals("1") || command.equals("2")) {
 			Assertions.assertThatCode(()-> game.changeGameStatus(command)).doesNotThrowAnyException();
 			return;
 		}
